@@ -1,0 +1,138 @@
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 1
+
+SELECT DISTINCT p.id_pacient, e.data, e.hora, t.id_t, a.rol, 
+
+    CASE 
+
+        WHEN t.id_t = t.id_tcai THEN 'TCAI' 
+
+        WHEN t.id_t = t.id_tl THEN 'TL' 
+
+        ELSE a.rol  
+
+    END AS "Rol Assignat" 
+
+FROM protocol p, esdeveniments e, atès a, treballador t, pacient pac, visites v 
+
+WHERE e.esdeveniment = 'Ingrès UCI' AND p.id_pacient = pac.id AND pac.id = a.id_pacient AND a.id_t = t.id_t AND e.data = a.data AND e.hora = a.hora AND a.data = v.data 
+
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 2
+
+SELECT COUNT(*) AS Quantitat_Protocols 
+
+FROM Protocol; 
+
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 3
+
+SELECT ID_pacient, COUNT(*) AS Vegades_UCI 
+
+FROM Atès 
+
+GROUP BY ID_pacient 
+
+ORDER BY ID_pacient; 
+
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 4
+
+SELECT id_t AS "ID Personal" 
+
+FROM treballador 
+
+WHERE id_t NOT IN (SELECT id_t FROM atès); 
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 5
+
+SELECT p."Codi Protocol", m.NOM 
+
+FROM Protocol p, Medicació m 
+
+WHERE p."Codi Protocol" = m."Codi Protocol" 
+
+  AND NOT EXISTS ( 
+
+    SELECT * 
+
+    FROM Cicle c 
+
+    WHERE c."Codi Protocol" = p."Codi Protocol" 
+
+  ); 
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 6
+
+SELECT p."Ritme Aturada", COUNT(*) AS activacions 
+
+FROM protocol p 
+
+GROUP BY p."Ritme Aturada" 
+
+ORDER BY activacions DESC; 
+
+---------------------------------------------------------------------------------------------------------
+
+
+--Consulta 7
+
+SELECT p."Codi Protocol", m.Nom, COUNT(c."Número de cicle") AS Quantitat_Cicles 
+
+FROM Protocol p, Medicació m, Cicle c 
+
+WHERE p."Codi Protocol" = m."Codi Protocol" AND p."Codi Protocol" = c."Codi Protocol" 
+
+GROUP BY p."Codi Protocol", m.Nom 
+
+ORDER BY Quantitat_Cicles; 
+
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 8
+
+
+SELECT DISTINCT p."Codi Protocol", c."Número de cicle", p.id_pacient, e.data AS data_ingrés, e.hora AS hora_ingrés, m.nom AS tractament, m."Quantitat Fixa" * v.pes AS valor 
+
+FROM protocol p, cicle c, esdeveniments e, visites v, medicació m, pacient pac, atès a 
+
+WHERE p."Codi Protocol" = c."Codi Protocol" AND p."Codi Protocol" = m."Codi Protocol" AND p.id_pacient = pac.ID AND a.id_pacient = pac.id AND e.data = a.data AND e.hora = a.hora AND a.data = v.data AND e.esdeveniment = 'Ingrès UCI'  
+
+ORDER BY e.data, e.hora; 
+
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 9
+
+SELECT id AS "ID Pacient", COUNT(*) AS "Quantitat de Malalties Descartades" 
+
+FROM malaltia 
+
+WHERE "Te?" = 'N' 
+
+GROUP BY id; 
+
+---------------------------------------------------------------------------------------------------------
+
+--Consulta 10
+
+SELECT id_pacient AS "ID Pacient", data AS "Data d'Ingrés" 
+
+FROM atès 
+
+GROUP BY id_pacient, data 
+
+HAVING COUNT(id_t) > 3; 
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+
