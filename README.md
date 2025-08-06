@@ -26,19 +26,19 @@ El sistema té com a objectiu principal **millorar la gestió i el tractament de
 
 Aquest projecte està dissenyat per consolidar i aplicar coneixements en les següents àrees tècniques:  
 
-###**Modelatge de Bases de Dades**  
+### **Modelatge de Bases de Dades**  
    - Dissenyar diagrames **Entitat-Relació (ER)** complexes amb:  
      - Entitats, atributs, relacions i cardinalitats.  
      - Identificació de claus primàries/foranes.  
    - Transformar models conceptuals (ER) a models lògics (**relacionals**).  
 
-###**SQL**  
+### **SQL**  
    - Crear i gestionar bases de dades amb **sentències DDL** (CREATE, ALTER, DROP).  
    - Implementar **restriccions** (PK, FK, CHECK) i regles de propagació (CASCADE).  
    - Escriure consultes complexes (**JOIN, GROUP BY, subconsultes**) per a informes clínics.
    - Treballar amb models jeràrquics. 
 
-###**Eines i Pràctiques Col·laboratives**  
+### **Eines i Pràctiques Col·laboratives**  
    - Utilitzar entorns com **Oracle SQL Developer** per a implementar i validar el model.  
    - Treballar en equip per a resoldre conflictes de disseny 
 
@@ -47,10 +47,10 @@ Aquest projecte està dissenyat per consolidar i aplicar coneixements en les seg
    - Documentar decisions de disseny.  
 
 ## Components del Projecte
-**Disseny Conceptual**: Inclou el diagrama Entitat-Relació (ER) que descriu les entitats principals (Pacient, Treballador, Visites, Malaltia, Protocol, Cicle, Medicació) i les seves interrelacions.
-**Disseny Lògic**: Conté el model relacional amb les taules de la base de dades, les claus primàries i foranes, així com les restriccions referencials.
-**Script SQL**: Inclou les sentències SQL per a la creació de taules, inserció de dades i consultes per validar el funcionament del sistema.
-**Joc de Proves**: Proporciona consultes SQL per verificar que la base de dades satisfà els requeriments inicials.
+- **Disseny Conceptual**: Inclou el diagrama Entitat-Relació (ER) que descriu les entitats principals (Pacient, Treballador, Visites, Malaltia, Protocol, Cicle, Medicació) i les seves interrelacions.
+- **Disseny Lògic**: Conté el model relacional amb les taules de la base de dades, les claus primàries i foranes, així com les restriccions referencials.
+- **Script SQL**: Inclou les sentències SQL per a la creació de taules, inserció de dades i consultes per validar el funcionament del sistema.
+- **Joc de Proves**: Proporciona consultes SQL per verificar que la base de dades satisfà els requeriments inicials.
 
 ## Requeriments
 El sistema ha de permetre:
